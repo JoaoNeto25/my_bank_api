@@ -4,7 +4,6 @@ const fs = require('fs');
 const path = require('path');
 
 const accountsRouter = require('../routes/accounts');
-
 describe('Account routes', () => {
   let app;
   const testFile = path.join(__dirname, 'accounts-test.json');
@@ -21,13 +20,13 @@ describe('Account routes', () => {
     fs.unlinkSync(testFile);
   });
 
-  it('creates an account and returns the created object', async () => {
-    const newAccount = { name: 'Test User', balance: 100 };
-    const res = await request(app).post('/account').send(newAccount);
-    expect(res.status).toBe(200);
-    expect(res.body).toEqual({ id: 1, ...newAccount });
-  });
-
+it('should create an account and return the created object', async () => {
+  const newAccount = { name: 'Test User', balance: 100 };
+  const res = await request(app).post('/account').send(newAccount);
+  expect(res.status).toBe(200);
+  expect(res.body).toEqual({ id: 1, ...newAccount });
+});
+  
   it('lists all accounts', async () => {
     const accounts = [
       { id: 1, name: 'Alice', balance: 100 },
@@ -109,4 +108,5 @@ describe('Account routes', () => {
     const json = JSON.parse(fs.readFileSync(testFile, 'utf8'));
     expect(json.accounts[0].balance).toBe(150);
   });
+
 });
