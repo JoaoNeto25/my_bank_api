@@ -20,10 +20,6 @@ describe('Account routes', () => {
     fs.unlinkSync(testFile);
   });
 
-  it('creates an account and returns the created object', async () => {
-    const newAccount = { name: 'Test User', balance: 100 };
-    const res = await request(app).post('/account').send(newAccount);
-
 it('should create an account and return the created object', async () => {
   const newAccount = { name: 'Test User', balance: 100 };
   const res = await request(app).post('/account').send(newAccount);
