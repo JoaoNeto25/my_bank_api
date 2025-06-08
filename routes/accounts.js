@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
   });
 });
 
-// Implementando o metodo GET
+// Implementando o método GET
 router.get("/", (_, res) => {
 
   fs.readFile(global.fileName, "utf8", (err, data) => {
