@@ -37,7 +37,7 @@ router.get("/", (_, res) => {
       delete json.nextId; // deletar campo de proximo id
       res.send(json);
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -57,7 +57,7 @@ router.get("/:id", (req, res) => {
         res.send();
       }
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -78,7 +78,7 @@ router.delete("/:id", (req, res) => {
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -103,7 +103,7 @@ router.put("/", (req, res) => {
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
