@@ -32,6 +32,8 @@ O servidor ficará disponível na porta `3000`.
 
 ## Como rodar os testes
 
+Com as dependências instaladas, execute os testes utilizando o Jest:
+
 ```bash
 npm test
 ```
