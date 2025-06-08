@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
   });
 });
 
-// Implementando o metodo GET
+// Implementando o método GET
 router.get("/", (_, res) => {
 
   fs.readFile(global.fileName, "utf8", (err, data) => {
@@ -37,7 +37,7 @@ router.get("/", (_, res) => {
       delete json.nextId; // deletar campo de proximo id
       res.send(json);
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -57,7 +57,7 @@ router.get("/:id", (req, res) => {
         res.send();
       }
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -72,13 +72,13 @@ router.delete("/:id", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send("Registro excluído com sucesso!");
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -97,13 +97,13 @@ router.put("/", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send();
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -117,17 +117,15 @@ router.post('/transaction', (req, res) => {
       let json = JSON.parse(data);
       let index = json.accounts.findIndex(account => account.id === params.id);
 
-      if ((params.value <= 0) && ((json.accounts[index].balance + params.value) <= 0)) {
+      if ((params.value < 0) && ((json.accounts[index].balance + params.value) < 0)) {
         throw new Error("Não Há saldo suficiente");
-      } else {
-        res.send();
-      };
+      }
 
       json.accounts[index].balance += params.value;
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send(json.accounts[index]);
         }
