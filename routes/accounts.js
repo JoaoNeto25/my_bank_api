@@ -72,7 +72,7 @@ router.delete("/:id", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send("Registro excluído com sucesso!");
         }
@@ -97,7 +97,7 @@ router.put("/", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send();
         }
@@ -117,17 +117,15 @@ router.post('/transaction', (req, res) => {
       let json = JSON.parse(data);
       let index = json.accounts.findIndex(account => account.id === params.id);
 
-      if ((params.value <= 0) && ((json.accounts[index].balance + params.value) <= 0)) {
+      if ((params.value < 0) && ((json.accounts[index].balance + params.value) < 0)) {
         throw new Error("Não Há saldo suficiente");
-      } else {
-        res.send();
-      };
+      }
 
       json.accounts[index].balance += params.value;
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send(json.accounts[index]);
         }
