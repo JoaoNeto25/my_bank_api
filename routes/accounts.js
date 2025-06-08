@@ -37,7 +37,7 @@ router.get("/", (_, res) => {
       delete json.nextId; // deletar campo de proximo id
       res.send(json);
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -57,7 +57,7 @@ router.get("/:id", (req, res) => {
         res.send();
       }
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -72,13 +72,13 @@ router.delete("/:id", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send("Registro excluído com sucesso!");
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -97,13 +97,13 @@ router.put("/", (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send();
         }
       });
     } catch (error) {
-      res.status(400).send({ error: err.message });
+      res.status(400).send({ error: error.message });
     }
   });
 });
@@ -127,7 +127,7 @@ router.post('/transaction', (req, res) => {
 
       fs.writeFile(global.fileName, JSON.stringify(json), err => {
         if (err) {
-          res.send.status(400).send({ error: err.message });
+          res.status(400).send({ error: err.message });
         } else {
           res.send(json.accounts[index]);
         }
